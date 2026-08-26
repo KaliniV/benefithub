@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <!-- FORMATAÇÃO DA SAÍDA DO LOG -->
+	<property name="CONSOLE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level : %logger{36} - %msg%n"/>
+
+  <!-- SAÍDA DO LOG PARA O CONSOLE -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+  <!-- PERFIS -->
+      <springProfile name="dev | default | kalini">
+        <root level="DEBUG">
+            <appender-ref ref="CONSOLE" />
+        </root>
+
+        <logger name="com.kalini.benefithub" level="TRACE" additivity="false">
+            <appender-ref ref="CONSOLE" />
+        </logger>
+    </springProfile>
+
+
+     <springProfile name="prod">
+        <root level="WARN">
+            <appender-ref ref="CONSOLE" />
+        </root>
+      
+        <logger name="com.kalini.benefithub" level="INFO" additivity="false">
+            <appender-ref ref="CONSOLE" />
+        </logger>
+    </springProfile>
+</configuration>
